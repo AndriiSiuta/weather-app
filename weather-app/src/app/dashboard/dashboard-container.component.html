@@ -1,0 +1,6 @@
+<ng-container *ngIf="state$ | async as state">
+    <ng-container *ngFor="let stateItem of state">
+        <app-card [weatherState]="stateItem">
+        </app-card>
+    </ng-container>
+</ng-container>
