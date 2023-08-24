@@ -1,9 +1,29 @@
-<ng-container *ngIf="state$ | async as state">
-    <ng-container *ngFor="let stateItem of state">
+<div class="saved-list-container">
+  <h1 class="saved-list-container__title">Saved List</h1>
+
+  <ng-container *ngIf="state$ | async as state; else loadingTpl">
+    <div class="saved-list-container__list">
+      <ng-container *ngFor="let stateItem of state">
         <app-card
-                (showLocationClick)="handleLocation($event)"
-                [lsState]="stateItem"
-                [weatherState]="stateItem">
+          class="saved-list-container__list-item"
+          (showLocationClick)="handleLocation($event)"
+          (removeUserClick)="handleRemove($event)"
+          [lsState]="stateItem"
+          [weatherState]="stateItem"
+        >
         </app-card>
-    </ng-container>
-</ng-container>
+      </ng-container>
+
+      <ng-container *ngIf="!state?.length">
+        <div class="saved-list-container__list-empty">
+          There are no saved users. Navigate to the
+          <a routerLink="/dashboard">Dashboard</a> and save some.
+        </div>
+      </ng-container>
+    </div>
+  </ng-container>
+
+  <ng-template #loadingTpl>
+    <div class="saved-list-container__loader">Loading...</div>
+  </ng-template>
+</div>

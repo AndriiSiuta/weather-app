@@ -1,50 +1,191 @@
-<div class="card-container">
-    <div class="card-container__image">
-        <img [src]="user.picture.medium" alt="">
-    </div>
+<!--<div class="card-container">-->
+<!--  <div class="card-container__image">-->
+<!--    <img-->
+<!--      [src]="user.picture.medium"-->
+<!--      alt=""-->
+<!--    />-->
+<!--  </div>-->
 
-    <div class="card-container__name">
-        {{ user.name.first }} {{ user.name.last }}
-    </div>
+<!--  <div class="card-container__name">-->
+<!--    {{ user.name.first }} {{ user.name.last }}-->
+<!--  </div>-->
 
-    <div class="card-container__gender">
-        {{ user.gender }}
-    </div>
+<!--  <div class="card-container__gender">-->
+<!--    {{ user.gender }}-->
+<!--  </div>-->
 
+<!--  <div class="card-container__location">-->
+<!--    {{ user.location.country }}-->
+<!--  </div>-->
 
-    <div class="card-container__location">
-        {{ user.location.country }}
-    </div>
+<!--  <div class="card-container__email">-->
+<!--    {{ user.email }}-->
+<!--  </div>-->
 
-    <div class="card-container__email">
-        {{ user.email }}
-    </div>
+<!--  <div class="weather-container">-->
+<!--    <div class="weather-container__temperature">-->
+<!--      Lowest: {{ lowestTemp }} C Highest: {{ highestTemp }} C-->
+<!--    </div>-->
 
-    <div class="weather-container">
-        <div class="weather-container__temperature">
-            Lowest: {{ lowestTemp }} C
-            Highest: {{ highestTemp }} C
-        </div>
+<!--    <div class="weather-container__weather-code">-->
+<!--      <fa-icon-->
+<!--        [size]="'2xl'"-->
+<!--        [icon]="['fas', iconClass]"-->
+<!--      ></fa-icon>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+<!--<ng-container *ngIf="canSave">-->
+<!--  <div class="card-container__button">-->
+<!--    <button-->
+<!--      class="card-container__button&#45;&#45;save"-->
+<!--      (click)="saveUser()"-->
+<!--    >-->
+<!--      Save-->
+<!--    </button>-->
+<!--  </div>-->
+<!--</ng-container>-->
 
-        <div class="weather-container__weather-code">
+<!--<ng-container *ngIf="showMap">-->
+<!--  <button-->
+<!--    class="card-container__button&#45;&#45;show-map"-->
+<!--    (click)="showLocation()"-->
+<!--  >-->
+<!--    Show Location on Map-->
+<!--  </button>-->
+<!--</ng-container>-->
+
+<div class="card">
+  <div class="card__user">
+    <div class="card__user-avatar">
+      <img
+        [src]="user.picture.medium"
+        [alt]="user.name.first + ' ' + user.name.last"
+        width="64px"
+        height="64px"
+      />
+
+      <div
+        class="card__user-avatar-gender"
+        [class.card__user-avatar-gender--male]="user.gender === 'male'"
+        [class.card__user-avatar-gender--female]="user.gender === 'female'"
+      >
+        <ng-container [ngSwitch]="user.gender">
+          <ng-container *ngSwitchCase="'male'">
             <fa-icon
-                    [size]="'2xl'"
-                    [icon]="['fas', iconClass]"></fa-icon>
-        </div>
+              [size]="'xs'"
+              [icon]="['fas', 'mars']"
+            ></fa-icon>
+          </ng-container>
+          <ng-container *ngSwitchCase="'female'">
+            <fa-icon
+              [size]="'xs'"
+              [icon]="['fas', 'venus']"
+            ></fa-icon>
+          </ng-container>
+        </ng-container>
+      </div>
     </div>
-</div>
-<ng-container *ngIf="isSave()">
-    <div class="card-container__button">
-        <button
-                class="card-container__button--save"
-                (click)="saveUser()">Save
-        </button>
-    </div>
-</ng-container>
 
-<ng-container *ngIf="showMap">
-    <button
-            class="card-container__button--show-map"
-            (click)="showLocation()">Show Location on Map
-    </button>
-</ng-container>
+    <div class="card__user-details">
+      <div class="card__user-details-general">
+        <div class="card__user-details-general-name">
+          {{ user.name.first }} {{ user.name.last }}
+        </div>
+
+        <a
+          [href]="'mailto:' + user.email"
+          class="card__user-details-general-email"
+        >
+          &lt;{{ user.email }}&gt;
+        </a>
+      </div>
+
+      <div class="card__user-details-location">
+        from
+        <a
+          target="_blank"
+          [href]="
+            'https://www.google.com.ua/maps/search/' +
+            user.location.city +
+            ', ' +
+            user.location.country
+          "
+        >
+          {{ user.location.city }}, {{ user.location.country }}
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="card__weather">
+    <div class="card__weather-title">
+      <fa-icon
+        [size]="'xl'"
+        [icon]="['fas', iconClass]"
+      ></fa-icon>
+      <div class="card__weather-title-text">Current weather:</div>
+    </div>
+
+    <div class="card__weather-temperature">
+      <div class="card__weather-temperature-item">
+        <div class="card__weather-temperature-item-title">
+          <fa-icon
+            [size]="'xs'"
+            [icon]="['fas', 'temperature-arrow-down']"
+          ></fa-icon>
+          <div class="card__weather-temperature-item-title-text">Lowest:</div>
+        </div>
+        <div class="card__weather-temperature-item-value">
+          {{ lowestTemp }} &deg;C
+        </div>
+      </div>
+
+      <div class="card__weather-temperature-item">
+        <div class="card__weather-temperature-item-title">
+          <fa-icon
+            [size]="'xs'"
+            [icon]="['fas', 'temperature-arrow-up']"
+          ></fa-icon>
+          <div class="card__weather-temperature-item-title-text">Highest:</div>
+        </div>
+        <div class="card__weather-temperature-item-value">
+          {{ highestTemp }} &deg;C
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card__actions">
+    <ng-container *ngIf="!saved">
+      <app-button (click)="saveUser()">
+        <fa-icon
+          slot="icon"
+          [size]="'xs'"
+          [icon]="['fas', 'user-plus']"
+        ></fa-icon>
+        Save
+      </app-button>
+    </ng-container>
+
+    <ng-container *ngIf="saved">
+      <app-button (click)="removeUser()">
+        <fa-icon
+          slot="icon"
+          [size]="'xs'"
+          [icon]="['fas', 'user-minus']"
+        ></fa-icon>
+        Remove
+      </app-button>
+    </ng-container>
+
+    <app-button (click)="showLocation()">
+      <fa-icon
+        slot="icon"
+        [size]="'xs'"
+        [icon]="['fas', 'map-pin']"
+      ></fa-icon>
+      Show Location on Map
+    </app-button>
+  </div>
+</div>

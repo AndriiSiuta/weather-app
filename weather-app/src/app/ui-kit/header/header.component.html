@@ -1,13 +1,37 @@
-<header class="app-header">
-    <div class="app-header__links">
-        <a
-                class="app-header__link"
-                routerLinkActive="app-header__link--active"
-                [routerLink]="['dashboard']">Dashboard</a>
+<header class="header">
+  <div class="header__title">
+    <fa-icon
+      [size]="'xs'"
+      [icon]="['fas', 'cloud-sun']"
+    ></fa-icon>
+    Weather App
+  </div>
 
-        <a
-                routerLinkActive="app-header__link--active"
-                class="app-header__link"
-                [routerLink]="['saved-list']">Saved List</a>
-    </div>
+  <div class="header__links">
+    <app-button
+      class="header__links-item"
+      routerLinkActive="button--active"
+      [routerLink]="['/dashboard']"
+    >
+      <fa-icon
+        slot="icon"
+        [size]="'xs'"
+        [icon]="['fas', 'gauge']"
+      ></fa-icon>
+      Dashboard
+    </app-button>
+
+    <app-button
+      class="header__links-item"
+      routerLinkActive="button--active"
+      [routerLink]="['/saved-list']"
+    >
+      <fa-icon
+        slot="icon"
+        [size]="'xs'"
+        [icon]="['fas', 'floppy-disk']"
+      ></fa-icon>
+      Saved List
+    </app-button>
+  </div>
 </header>
