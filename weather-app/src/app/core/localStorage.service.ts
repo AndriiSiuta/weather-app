@@ -1,18 +1,16 @@
-import { inject, Injectable } from '@angular/core';
-import { LOCAL_STORAGE } from '@core/tokens';
-import { IWeatherState, LS_KEY } from '@core/model';
-import { BehaviorSubject } from 'rxjs';
+import {inject, Injectable} from '@angular/core';
+import {LOCAL_STORAGE} from '@core/tokens';
+import {IWeatherState, LS_KEY} from '@core/model';
+import {BehaviorSubject} from 'rxjs';
 
 @Injectable()
-
 export class LocalStorageService {
   localStorage = inject(LOCAL_STORAGE);
   private readonly state$ = new BehaviorSubject<IWeatherState>(
-    this.getItems(LS_KEY)
+    this.getItems(LS_KEY),
   );
 
-  constructor() {
-  }
+  constructor() {}
 
   /**
    * Save item to local storage
@@ -23,6 +21,21 @@ export class LocalStorageService {
     // mutation but it's okay
     val.saved = true;
     lsState[val.user.login.uuid] = val;
+    const newState = Object.assign({}, lsState);
+    this.localStorage.setItem(LS_KEY, JSON.stringify(newState));
+    this.state$.next(newState);
+  }
+
+  /**
+   * Removes an item from the local storage and updates the state.
+   *
+   * @param {IWeatherState} val - The value representing the item to remove.
+   *
+   * @return {void}
+   */
+  removeItem(val: IWeatherState): void {
+    const lsState = this.getItems();
+    delete lsState[val.user.login.uuid];
     const newState = Object.assign({}, lsState);
     this.localStorage.setItem(LS_KEY, JSON.stringify(newState));
     this.state$.next(newState);

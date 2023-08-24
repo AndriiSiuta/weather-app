@@ -1,72 +1,86 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
-import { IUser, IWeatherResponse, IWeatherState, WeatherCodeToIconMap } from '@core/model';
-import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
-import { fas } from '@fortawesome/free-solid-svg-icons';
-import { far } from '@fortawesome/free-regular-svg-icons';
-
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+} from '@angular/core';
+import {
+  IUser,
+  IWeatherResponse,
+  IWeatherState,
+  WeatherCodeToIconMap,
+} from '@core/model';
+import {FaIconLibrary} from '@fortawesome/angular-fontawesome';
+import {fas} from '@fortawesome/free-solid-svg-icons';
+import {far} from '@fortawesome/free-regular-svg-icons';
 
 @Component({
-	selector: 'app-card',
-	templateUrl: './card.component.html',
-	styleUrls: ['./card.component.scss'],
-	changeDetection: ChangeDetectionStrategy.OnPush
+  selector: 'app-card',
+  templateUrl: './card.component.html',
+  styleUrls: ['./card.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-
 export class CardComponent {
-	@Input()
-	weatherState!: IWeatherState;
+  @Input()
+  weatherState!: IWeatherState;
 
-	@Input()
-	lsState!: IWeatherState | null;
+  @Input()
+  lsState!: IWeatherState | null;
 
-	@Input()
-	showMap = true;
+  @Input()
+  showMap = true;
 
-	@Output()
-	saveUserClick = new EventEmitter<IWeatherState>();
+  @Output()
+  saveUserClick = new EventEmitter<IWeatherState>();
 
-	@Output()
-	showLocationClick = new EventEmitter<IWeatherState>();
+  @Output()
+  removeUserClick = new EventEmitter<IWeatherState>();
 
-	get user(): IUser {
-		return this.weatherState.user;
-	}
+  @Output()
+  showLocationClick = new EventEmitter<IWeatherState>();
 
-	get weather(): IWeatherResponse {
-		return this.weatherState.weather;
-	}
+  get saved(): boolean {
+    return this.lsState?.saved || false;
+  }
 
-	get lowestTemp(): number {
-		return Math.min(...this.weather.hourly.temperature_2m);
-	}
+  get user(): IUser {
+    return this.weatherState.user;
+  }
 
-	get highestTemp(): number {
-		return Math.max(...this.weather.hourly.temperature_2m);
-	}
+  get weather(): IWeatherResponse {
+    return this.weatherState.weather;
+  }
 
-	saveUser() {
-		this.saveUserClick.emit(this.weatherState);
-	}
+  get lowestTemp(): number {
+    return Math.min(...this.weather.hourly.temperature_2m);
+  }
 
-	isSave() {
-		if (!this.lsState) {
-			return true
-		}
+  get highestTemp(): number {
+    return Math.max(...this.weather.hourly.temperature_2m);
+  }
 
-		return !this.lsState.saved;
-	}
+  get iconClass() {
+    return (
+      WeatherCodeToIconMap.get(
+        this.weatherState.weather.current_weather.weathercode,
+      ) || 'sun'
+    );
+  }
 
-	get iconClass() {
-		return WeatherCodeToIconMap.get(this.weatherState.weather.current_weather.weathercode) || 'sun';
-	}
+  saveUser() {
+    this.saveUserClick.emit(this.weatherState);
+  }
 
-	showLocation() {
-		this.showLocationClick.next(this.weatherState);
-	}
+  removeUser() {
+    this.removeUserClick.emit(this.weatherState);
+  }
 
-	constructor(
-		library: FaIconLibrary
-	) {
-		library.addIconPacks(fas, far);
-	}
+  showLocation(): void {
+    this.showLocationClick.next(this.weatherState);
+  }
+
+  constructor(library: FaIconLibrary) {
+    library.addIconPacks(fas, far);
+  }
 }

@@ -1,7 +1,29 @@
 :host {
+  overflow-y: auto;
+  flex: 0 1 auto;
+}
+
+.dashboard-container {
   display: flex;
-  justify-content: space-around;
-  flex: 1 0 auto;
-  flex-wrap: wrap;
-  gap: 8px;
+  flex-direction: column;
+  gap: 28px;
+  padding: 28px 16px;
+  min-height: 100vh;
+
+  &__title {
+    font-size: 2rem;
+    font-weight: 600;
+    margin: 0;
+  }
+
+  &__list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 16px;
+  }
+
+  &__loader {
+    flex: 1;
+    min-height: 100%;
+  }
 }

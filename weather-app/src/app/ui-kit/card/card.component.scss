@@ -1,59 +1,177 @@
 :host {
-  display: flex;
-  width: 400px;
-  height: 400px;
-  flex-direction: column;
-  padding: 10px;
-  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  flex: 1;
+  max-width: 100%;
 }
 
-.card-container {
+.card {
   display: flex;
-  flex: 1 0 auto;
-  gap: 8px;
   flex-direction: column;
-  padding: 10px;
-  align-items: center;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  overflow: hidden;
+  height: 100%;
+  white-space: nowrap;
 
+  &__user {
+    padding: 16px;
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
 
-  &__image {
-    img {
-      border-radius: 999px;
+    &-avatar {
+      position: relative;
+
+      img {
+        width: 48px;
+        height: 48px;
+        border-radius: 9999px;
+        outline: 2px solid rgba(0, 0, 0, 0.15);
+        outline-offset: -2px;
+      }
+
+      &-gender {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 20px;
+        height: 20px;
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 9999px;
+        outline: 1px solid rgba(0, 0, 0, 0.15);
+        outline-offset: -1px;
+
+        &--male {
+          background: #1572a1;
+
+          fa-icon {
+            color: rgba(255, 255, 255, 0.75);
+          }
+        }
+
+        &--female {
+          background: #ea8fea;
+
+          fa-icon {
+            color: rgba(0, 0, 0, 0.5);
+          }
+        }
+      }
+    }
+
+    &-details {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      overflow: hidden;
+
+      &-general {
+        display: flex;
+        white-space: nowrap;
+        gap: 4px;
+        overflow: hidden;
+
+        &-name {
+          font-weight: 600;
+          text-overflow: ellipsis;
+          overflow: hidden;
+        }
+
+        &-email {
+          color: rgba(0, 0, 0, 0.5);
+          text-overflow: ellipsis;
+          overflow: hidden;
+
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+
+      &-location {
+        color: rgba(0, 0, 0, 0.5);
+        text-overflow: ellipsis;
+        overflow: hidden;
+
+        a {
+          color: inherit;
+
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
     }
   }
 
-  &__button {
+  &__weather {
+    padding: 16px;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column;
+    gap: 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+
+    &-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 600;
+      font-size: 1.25rem;
+
+      fa-icon {
+        font-size: 0.9rem;
+      }
+
+      &-text {
+        text-overflow: ellipsis;
+        overflow: hidden;
+      }
+    }
+
+    &-temperature {
+      display: flex;
+      align-items: start;
+
+      &-item {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        flex: 1;
+
+        &-title {
+          display: flex;
+          align-items: center;
+          gap: 4px;
+          font-weight: 600;
+          text-overflow: ellipsis;
+          overflow: hidden;
+
+          &-text {
+            text-overflow: ellipsis;
+            overflow: hidden;
+          }
+        }
+
+        &-value {
+          font-size: 2rem;
+          font-weight: 600;
+          text-overflow: ellipsis;
+          overflow: hidden;
+        }
+      }
+    }
   }
-}
 
-.weather-container {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-
-  &__weather-code {
+  &__actions {
+    padding: 16px;
     display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-}
-
-button {
-  display: flex;
-  width: 200px;
-  height: 40px;
-  border-radius: 10px;
-  border: 1px solid black;
-  background: transparent;
-  outline: none;
-  justify-content: center;
-  align-items: center;
-
-  &--save {
-    display: flex;
-    flex: 1 0 auto;
+    gap: 16px;
   }
 }
