@@ -1,9 +1,8 @@
 <ng-container *ngIf="state$ | async as state">
     <ng-container *ngFor="let stateItem of state">
         <app-card
-                [showMap]="false"
-                [lsState]="(bhState$ | filterObs : stateItem) | async"
-                (saveUserClick)="handleSave($event)"
+                (showLocationClick)="handleLocation($event)"
+                [lsState]="stateItem"
                 [weatherState]="stateItem">
         </app-card>
     </ng-container>

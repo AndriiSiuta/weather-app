@@ -12,16 +12,8 @@ import { GeolocationService } from '@core/geolocation.service';
 export class AppComponent {
 	title = 'weather-app';
 
-	geolocationService = inject(GeolocationService);
-	navigator = inject(NAVIGATOR);
 	constructor(
 	) {
 	}
 
-	ngOnInit() {
-		this.navigator.geolocation.getCurrentPosition((position: GeolocationPosition) => {
-			console.log('start tracking your position');
-			this.geolocationService.subscribe(console.log);
-		})
-	}
 }

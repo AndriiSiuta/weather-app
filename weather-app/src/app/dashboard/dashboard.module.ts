@@ -1,15 +1,22 @@
 import { NgModule } from '@angular/core';
 import { DashboardContainerComponent } from './dashboard-container.component';
 import { DashboardRoutingModule } from './dashboard-routing.module';
-import { CardComponent } from './card/card.component';
-import { AsyncPipe, JsonPipe, NgForOf, NgIf } from '@angular/common';
+import { IsShowPipe } from '@ui-kit/card/isShopw.pipe';
+import { UiKitModule } from '@ui-kit/ui-kit.module';
+import { AsyncPipe, NgForOf, NgIf } from '@angular/common';
 
 @NgModule({
-	imports: [DashboardRoutingModule, NgIf, AsyncPipe, NgForOf, JsonPipe],
-  declarations: [
-    DashboardContainerComponent,
-    CardComponent,
-  ]
+	imports: [
+		DashboardRoutingModule,
+		UiKitModule,
+		AsyncPipe,
+		NgIf,
+		NgForOf,
+	],
+	declarations: [
+		DashboardContainerComponent,
+		IsShowPipe,
+	]
 })
 
 export class DashboardModule {

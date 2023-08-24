@@ -7,6 +7,7 @@ import { UserStateService } from '@core/user-state.service';
 import { WeatherStateService } from '@core/weather-state.service';
 import { ICoreConfig } from '@core/model';
 import { GeolocationService } from '@core/geolocation.service';
+import { LocalStorageService } from '@core/localStorage.service';
 
 @NgModule({
 	imports: [HttpClientModule]
@@ -25,6 +26,7 @@ export class CoreModule {
 					provide: WEATHER_API_URL,
 					useValue: config.weatherApiUrl
 				},
+        LocalStorageService,
 				GeolocationService,
 				UserApiService,
 				UserStateService,

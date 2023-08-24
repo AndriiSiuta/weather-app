@@ -73,7 +73,7 @@ export interface Registered {
 
 export interface Id {
 	name: string
-	value?: string
+	value: string
 }
 
 export interface Picture {
@@ -141,7 +141,9 @@ export interface IHourly {
 export interface IWeatherState {
 	user: IUser;
 	weather: IWeatherResponse;
+  saved: boolean;
 }
+
 
 export enum WeatherCode {
 	clearSky = 0,
@@ -178,11 +180,11 @@ export enum WeatherIcon {
 	sun = 'sun',
 	cloudSun = 'cloud-sun',
 	cloud = 'cloud',
-	cloudFog = 'cloud-fog',
-	cloudDrizzle = 'cloud-drizzle',
+	cloudFog = 'cloud',
+	cloudDrizzle = 'cloud-showers-heavy',
 	cloudRain = 'cloud-rain',
-	cloudSnow = 'cloud-snow',
-	cloudShowers = 'cloud-showers',
+	cloudSnow = 'snowflake',
+	cloudShowers = 'cloud-showers-heavy',
 	bolt = 'bolt',
 }
 
@@ -217,3 +219,4 @@ export const WeatherCodeToIconMap = new Map<WeatherCode, WeatherIcon>()
 	.set(WeatherCode.thunderstormHeavy, WeatherIcon.bolt)
 
 
+export const LS_KEY = 'state';

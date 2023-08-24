@@ -1,1 +1,13 @@
-<p>header works!</p>
+<header class="app-header">
+    <div class="app-header__links">
+        <a
+                class="app-header__link"
+                routerLinkActive="app-header__link--active"
+                [routerLink]="['dashboard']">Dashboard</a>
+
+        <a
+                routerLinkActive="app-header__link--active"
+                class="app-header__link"
+                [routerLink]="['saved-list']">Saved List</a>
+    </div>
+</header>

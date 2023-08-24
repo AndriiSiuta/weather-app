@@ -1,0 +1,50 @@
+<div class="card-container">
+    <div class="card-container__image">
+        <img [src]="user.picture.medium" alt="">
+    </div>
+
+    <div class="card-container__name">
+        {{ user.name.first }} {{ user.name.last }}
+    </div>
+
+    <div class="card-container__gender">
+        {{ user.gender }}
+    </div>
+
+
+    <div class="card-container__location">
+        {{ user.location.country }}
+    </div>
+
+    <div class="card-container__email">
+        {{ user.email }}
+    </div>
+
+    <div class="weather-container">
+        <div class="weather-container__temperature">
+            Lowest: {{ lowestTemp }} C
+            Highest: {{ highestTemp }} C
+        </div>
+
+        <div class="weather-container__weather-code">
+            <fa-icon
+                    [size]="'2xl'"
+                    [icon]="['fas', iconClass]"></fa-icon>
+        </div>
+    </div>
+</div>
+<ng-container *ngIf="isSave()">
+    <div class="card-container__button">
+        <button
+                class="card-container__button--save"
+                (click)="saveUser()">Save
+        </button>
+    </div>
+</ng-container>
+
+<ng-container *ngIf="showMap">
+    <button
+            class="card-container__button--show-map"
+            (click)="showLocation()">Show Location on Map
+    </button>
+</ng-container>
