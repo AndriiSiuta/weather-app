@@ -1,0 +1,42 @@
+:host {
+  flex: 1;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+:host(.button--active) {
+  .button {
+    background: white;
+  }
+}
+
+.button {
+  width: 100%;
+  padding: 8px 16px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all 0.2s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  overflow: hidden;
+  white-space: nowrap;
+
+  &__text {
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+
+  &:hover {
+    cursor: pointer;
+    background: rgba(255, 255, 255, 0.3);
+  }
+
+  &:active {
+    background: rgba(255, 255, 255, 0.4);
+  }
+}

@@ -1,35 +1,32 @@
-:host {
+.header {
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 16px;
   display: flex;
-  flex: 1 0 auto;
-  height: 50px;
+  justify-content: space-between;
   align-items: center;
-  padding: 0 20px;
-  border-bottom: 1px solid black;
-  margin-bottom: 20px;
-  background: #f3f3f3;
-}
 
-.app-header {
-  display: flex;
-  flex: 1 0 auto;
-  gap: 4px;
+  &__title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    fa-icon {
+      font-size: 2rem;
+    }
+  }
 
   &__links {
     display: flex;
-    flex: 1 0 auto;
-    justify-content: flex-end;
-  }
+    gap: 16px;
 
-  &__link {
-    display: flex;
-    flex: 0 0 auto;
-    margin-left: 10px;
-    font-size: 16px;
-    font-weight: bold;
-    color: #000;
-
-    &--active {
-      color: #f343;
+    &-item {
+      flex: 1 0 auto;
     }
   }
 }
