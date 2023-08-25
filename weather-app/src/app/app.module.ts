@@ -6,13 +6,11 @@ import { AppComponent } from './app.component';
 import { UiKitModule } from '@ui-kit/ui-kit.module';
 import { CoreModule } from '@core/core.module';
 import { CORE_CONFIG } from '@core/model';
-import { UserInfoComponent } from './user-info/user-info.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
 	declarations: [
 		AppComponent,
-		UserInfoComponent
 	],
 	imports: [
 		BrowserModule,
